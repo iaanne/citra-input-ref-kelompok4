@@ -2,7 +2,7 @@
 
 Mata kuliah Analisis Data Citra Biomedis.
 
-Repo ini berisi citra masukan dan satu notebook Jupyter yang memuat implementasi mean filter, median filter, dan perataan histogram.
+Repo ini berisi citra masukan dan satu notebook Jupyter yang memuat implementasi mean filter, median filter, perataan histogram, dan spesifikasi histogram.
 
 ## Isi repo
 
@@ -30,7 +30,7 @@ Buka `notebook.ipynb` di Jupyter, lalu pilih Run All. Pastikan folder `images/` 
 | C2 | Mean filter 3x3 dan 5x5, lengkap dengan histogram dan analisis | selesai |
 | C3 | Median filter 3x3 dan 5x5, lengkap dengan histogram dan analisis | selesai |
 | C4 | Perataan histogram, citra asli dan hasil beserta histogramnya | selesai |
-| C5 | Spesifikasi histogram dengan `images/REFERENCE.png` | belum dikerjakan |
+| C5 | Spesifikasi histogram dengan `images/REFERENCE.png` | selesai |
 
 Fungsi pembantu `show_image_hist` dan `hist_values` dipakai ulang di seluruh bagian. Filter median dan mean diimplementasikan manual dengan NumPy, lalu diverifikasi terhadap `scipy.ndimage` pada cell masing-masing.
 
@@ -41,6 +41,7 @@ Beberapa angka yang dipakai pada bagian analisis:
 - Mean filter dan median filter sama-sama ditulis manual dengan NumPy. Padding tepi memakai mode `reflect`, sehingga dimensi citra tidak berubah.
 - Pada citra utama, mean filter lebih efektif menekan derau, sedangkan median filter hampir tidak mengubah tepi anatomi. Retensi tepi diukur sebagai rasio rata-rata magnitude gradien pada piksel tepi terhadap citra asli.
 - Perataan histogram menaikkan kecerahan rata-rata citra, tetapi kontras antar jaringan di area parenkim justru berkurang. Penyebabnya komposisi histogram citra yang didominasi background bernilai 0 dan tulang yang jenuh di 255.
+- Histogram specification memakai `images/INPUT.png` sebagai citra input dan `images/REFERENCE.png` sebagai referensi. Mean citra input 80.772 menjadi 59.693 dan std 87.044 menjadi 64.570, mendekati referensi (41.591 / 40.481). Selisih rata-rata CDF hasil terhadap referensi 0.0720 dengan maksimum 0.4001, karena 40.42% piksel input menumpuk di level 0 dan harus masuk ke satu level hasil (15) oleh sifat monotonnya pemetaan.
 
 Seluruh angka pada bagian analisis diambil langsung dari output cell, bukan estimasi manual.
 
