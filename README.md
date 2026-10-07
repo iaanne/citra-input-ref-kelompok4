@@ -8,7 +8,7 @@ Repo ini berisi citra masukan dan satu notebook Jupyter yang memuat implementasi
 
 ```
 images/INPUT.png       citra utama, CT kepala axial grayscale 8-bit 512x512
-images/REFERENCE.png   citra referensi untuk histogram specification
+images/REFERENCE.png   citra referensi (kepala dengan urutan MRI T2) untuk histogram specification
 notebook.ipynb         seluruh kode dan analisis
 ```
 
@@ -41,7 +41,7 @@ Beberapa angka yang dipakai pada bagian analisis:
 - Mean filter dan median filter sama-sama ditulis manual dengan NumPy. Padding tepi memakai mode `reflect`, sehingga dimensi citra tidak berubah.
 - Pada citra utama, mean filter lebih efektif menekan derau, sedangkan median filter hampir tidak mengubah tepi anatomi. Retensi tepi diukur sebagai rasio rata-rata magnitude gradien pada piksel tepi terhadap citra asli.
 - Perataan histogram menaikkan kecerahan rata-rata citra, tetapi kontras antar jaringan di area parenkim justru berkurang. Penyebabnya komposisi histogram citra yang didominasi background bernilai 0 dan tulang yang jenuh di 255.
-- Histogram specification memakai `images/INPUT.png` sebagai citra input dan `images/REFERENCE.png` sebagai referensi. Mean citra input 80.772 menjadi 59.693 dan std 87.044 menjadi 64.570, mendekati referensi (41.591 / 40.481). Selisih rata-rata CDF hasil terhadap referensi 0.0720 dengan maksimum 0.4001, karena 40.42% piksel input menumpuk di level 0 dan harus masuk ke satu level hasil (15) oleh sifat monotonnya pemetaan.
+- Histogram specification memakai `images/INPUT.png` (CT kepala axial) sebagai citra input dan `images/REFERENCE.png` (kepala dengan urutan MRI T2) sebagai referensi. Mean citra input 80.772 menjadi 59.693 dan std 87.044 menjadi 64.570, mendekati referensi (41.591 / 40.481). Selisih rata-rata CDF hasil terhadap referensi 0.0720 dengan maksimum 0.4001, karena 40.42% piksel input menumpuk di level 0 dan harus masuk ke satu level hasil (15) oleh sifat monoton dan banyak-ke-satu pemetaannya, sehingga kecocokan hanya bersifat aproksimasi.
 
 Seluruh angka pada bagian analisis diambil langsung dari output cell, bukan estimasi manual.
 
